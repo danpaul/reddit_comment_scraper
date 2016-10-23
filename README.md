@@ -1,6 +1,6 @@
 ## About
 
-reddit_comment_scraper is a utitlity which intermittently fetches the top posts on Reddit and and save their comments to a database.
+`reddit_comment_scraper` is a utitlity which intermittently fetches the top 100 posts on Reddit and and saves their comments to a database.
 
 ## To Run
 
