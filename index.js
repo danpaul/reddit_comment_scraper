@@ -90,7 +90,6 @@ const checkFeeds = function(){
     });
 }
 
-
 require('./schema')({knex: knex}, function(err){
     if( err ){ throw(err); }
     checkFeeds();

@@ -1,6 +1,5 @@
 const _ = require('underscore');
 const async = require('async');
-// var knex = require('knex');
 
 const SCHEMA = {
     comments: function(table){
