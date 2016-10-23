@@ -34,7 +34,9 @@ const getCommentsFromRecentAndSave = function(recent, callback){
         const subreddit = post.data.subreddit;
         getCommentsAndSave(id, subreddit, function(err){
             if( err ){ handleError(err); }
-            console.log('comments saved for: ', id);
+            if( config.debug ){
+                console.log('comments saved for: ', id);
+            }
             setTimeout(callback, requestDelay);
         })
     }, callback);
@@ -65,7 +67,8 @@ const saveComments = function(postId, data, callback){
                     .then(function(){ return callback(); })
                     .error(callback)
             } else {
-                const d = {postId: postId, commentData: stringData, createdAt: Date.now()};
+                const timeStamp = Math.round(Date.now()/1000);
+                const d = {postId: postId, commentData: stringData, createdAt: timeStamp};
                 return knex.table(tableName)
                     .insert(d)
                     .then(function(){ return callback(); })
@@ -80,7 +83,9 @@ const checkFeeds = function(){
         if( err ){ return(handleError(err)); }
         getCommentsFromRecentAndSave(recent, function(err, recent){
             if( err ){ return(handleError(err)); }
-            console.log('********** Saved comments cycle complete **********');
+            if( config.debug ){
+                console.log('********** Saved comments cycle complete **********');
+            }
         });
     });
 }
