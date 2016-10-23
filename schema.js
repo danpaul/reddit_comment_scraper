@@ -6,7 +6,7 @@ const SCHEMA = {
         table.increments();
         table.integer('createdAt').index();
         table.string('postId').index();
-        table.text('commentData', 'MEDIUMTEXT');
+        table.text('commentData', 'mediumtext');
     }
 }
 
