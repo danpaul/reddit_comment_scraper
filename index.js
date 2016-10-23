@@ -68,7 +68,7 @@ const saveComments = function(postId, data, callback){
                     .error(callback)
             } else {
                 const timeStamp = Math.round(Date.now()/1000);
-                const d = {postId: postId, commentData: stringData, createdAt: timeStamp};
+                const d = {postId: postId, commentData: data, createdAt: timeStamp};
                 return knex.table(tableName)
                     .insert(d)
                     .then(function(){ return callback(); })
