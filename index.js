@@ -49,21 +49,21 @@ const getCommentsAndSave = function(postId, subreddit, callback){
         if( response.statusCode !== 200 ){
             return callback(new Error('Received status code: ' + response.statusCode));
         }
-        var data = JSON.parse(body);
-        if( !data ){ return callback(new Error('Received no data')); }
-        saveComments(postId, data, callback);
+        // var data = JSON.parse(body);
+        // if( !data ){ return callback(new Error('Received no data')); }
+        saveComments(postId, body, callback);
     });
 }
 
 const saveComments = function(postId, data, callback){
-    const stringData = JSON.stringify(data);
+    // const stringData = JSON.stringify(data);
     knex.table(tableName)
         .where({postId: postId})
         .then(function(rows){
             if( rows.length ){
                 return knex.table(tableName)
                     .where('postId', postId)
-                    .update('commentData', stringData)
+                    .update('commentData', data)
                     .then(function(){ return callback(); })
                     .error(callback)
             } else {
